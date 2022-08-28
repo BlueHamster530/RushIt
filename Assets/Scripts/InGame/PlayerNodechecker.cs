@@ -27,7 +27,7 @@ public class PlayerNodechecker : MonoBehaviour
             nodes.Enqueue(collision.gameObject.transform.GetComponent<NodeInfo>());
         }
     }
-    private void DeQueuueNode(NodeScore _Score = NodeScore.Null)
+    private void DeQueuueNode(NodeScore _Score = NodeScore.Null,float _disabletime = 0.0f)
     {
         if (nodes.Count <= 0) return;
        NodeInfo clone = nodes.Dequeue();
@@ -49,14 +49,14 @@ public class PlayerNodechecker : MonoBehaviour
         }
         print(_Score);
         cGameManager.instance.AddScore((int)_Score);
-        clone.DisableObject(1.5f);
+        clone.DisableObject(_disabletime);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (Playerinfo.bIsNodeBuilder == true) return;
         if (collision.CompareTag("Node"))
         {
-            DeQueuueNode(NodeScore.Bad);
+            DeQueuueNode(NodeScore.Bad,1.0f);
         }
     }
 }

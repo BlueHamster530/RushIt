@@ -35,16 +35,17 @@ public class NodeInfo : MonoBehaviour
         {
             renderer.color = Color.white;
         }
-        renderer.sprite = Spirteimage[_type];
+        renderer.sprite = Spirteimage[nType];
         
     }
     public void DisableObject(float _time = 0.0f)
     {
-        Invoke("UnableObject", _time);
+        StartCoroutine(UnAbleObject(_time));
     }
-    private void UnableObject()
+    private IEnumerator UnAbleObject(float _time)
     {
+       yield return new WaitForSeconds(_time);
         gameObject.SetActive(false);
-
+        yield return null;
     }
 }
